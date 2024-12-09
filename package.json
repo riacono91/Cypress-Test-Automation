@@ -1,0 +1,15 @@
+{
+  "name": "cypress-test-automation",
+  "version": "1.0.0",
+  "description": "Example of an automation test with Cypress on a demo web page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.16.1"
+  }
+}
