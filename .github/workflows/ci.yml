@@ -24,17 +24,18 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Clean and install dependencies
+      - name: Run setup script
         run: |
-          rm -rf node_modules package-lock.json
-          npm install
-
-      - name: Ensure Cypress executable permissions
-        if: runner.os == 'Linux' || runner.os == 'macOS'
-        run: chmod +x ./node_modules/.bin/cypress
-
-      - name: Debug environment
-        run: env
+          if [ "${{ runner.os }}" == "Windows" ]; then
+            setup.bat
+          elif [ "${{ runner.os }}" == "Linux" ]; then
+            bash setup.sh
+          elif [ "${{ runner.os }}" == "macOS" ]; then
+            bash setup.sh
+          else
+            echo "Unsupported OS: ${{ runner.os }}"
+            exit 1
+          fi
 
       - name: Run Cypress tests
         run: npx cypress run
