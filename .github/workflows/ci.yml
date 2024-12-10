@@ -39,7 +39,7 @@ jobs:
         run: npx cypress install  # Scarica il binario Cypress (se non presente)
 
       - name: Ensure Cypress executable permissions
-        run: chmod +x ./node_modules/.bin/cypress  # Assicura che Cypress abbia i permessi esecutivi
+        run: chmod +x ./node_modules/.bin/cypress  # Aggiungi permessi esecutivi a Cypress
 
       - name: Run Cypress tests
         run: npx cypress run  # Esegui i test Cypress
