@@ -1,13 +1,19 @@
 #!/bin/bash
 
-# Clone the repository
-echo "Cloning the repository..."
-git clone https://github.com/riacono91/Cypress-Test-Automation.git
-cd Cypress-Test-Automation || exit
+# Exit immediately if a command exits with a non-zero status
+set -e
 
 # Install dependencies
 echo "Installing dependencies..."
 npm install
 
-# Done!
-echo "Setup complete! You can now run Cypress with 'npx cypress open'."
+# Ensure Cypress binary is executable
+echo "Ensuring Cypress binary permissions..."
+chmod +x ./node_modules/.bin/cypress
+
+# Install Cypress binary
+echo "Installing Cypress binary..."
+npx cypress install
+
+# Done
+echo "Setup complete! You can now run Cypress with 'npx cypress run'."
