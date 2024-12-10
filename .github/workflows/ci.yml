@@ -1,4 +1,5 @@
-name: Cypress Tests (Ubuntu)
+
+name: Cypress Tests
 
 on:
   push:
@@ -10,36 +11,26 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Esegui solo su Ubuntu
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Esegui il checkout del codice
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Configura la versione di Node.js
+          node-version: '16'
 
-      - name: Cache Cypress binary
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/Cypress
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-cypress-
-
-      - name: Run setup.sh script
-        run: bash setup.sh  # Esegui il tuo script setup.sh
-
-      - name: Install dependencies
-        run: npm install  # Installa le dipendenze
-
-      - name: Install Cypress binary
-        run: npx cypress install  # Scarica il binario Cypress (se non presente)
+      - name: Clean and install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Ensure Cypress executable permissions
-        run: chmod +x ./node_modules/.bin/cypress  # Aggiungi permessi esecutivi a Cypress
+        run: chmod +x ./node_modules/.bin/cypress
+
+      - name: Debug environment
+        run: env
 
       - name: Run Cypress tests
-        run: npx cypress run  # Esegui i test Cypress
+        run: ./node_modules/.bin/cypress run
