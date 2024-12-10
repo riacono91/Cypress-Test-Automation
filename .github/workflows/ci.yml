@@ -18,28 +18,23 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Esegui il checkout del codice
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Configura la versione di Node.js
+          node-version: '16'
 
-      - name: Run setup script
-        run: |
-          if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
-            bash setup.sh  # Usa il setup.sh su Ubuntu
-          else
-            setup.bat  # Usa il setup.bat su Windows
-        shell: bash  # Necessario per Ubuntu; Windows userà cmd automaticamente
+      - name: Run setup script (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: bash setup.sh  # Usa il setup.sh per Ubuntu
+
+      - name: Run setup script (Windows)
+        if: matrix.os == 'windows-latest'
+        run: setup.bat  # Usa il setup.bat per Windows
 
       - name: Install Cypress binary
-        run: |
-          if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
-            npx cypress install
-          else
-            npx cypress install
-        shell: bash
+        run: npx cypress install
 
       - name: Ensure Cypress executable permissions (Linux Only)
         if: matrix.os == 'ubuntu-latest'
