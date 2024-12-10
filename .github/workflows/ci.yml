@@ -1,5 +1,4 @@
-
-name: Cypress Tests
+name: Cypress Tests (Ubuntu & Windows)
 
 on:
   push:
@@ -11,26 +10,40 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2  # Esegui il checkout del codice
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '16'  # Configura la versione di Node.js
 
-      - name: Clean and install dependencies
+      - name: Run setup script
         run: |
-          rm -rf node_modules package-lock.json
-          npm install
+          if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
+            bash setup.sh  # Usa il setup.sh su Ubuntu
+          else
+            setup.bat  # Usa il setup.bat su Windows
+        shell: bash  # Necessario per Ubuntu; Windows userà cmd automaticamente
 
-      - name: Ensure Cypress executable permissions
+      - name: Install Cypress binary
+        run: |
+          if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
+            npx cypress install
+          else
+            npx cypress install
+        shell: bash
+
+      - name: Ensure Cypress executable permissions (Linux Only)
+        if: matrix.os == 'ubuntu-latest'
         run: chmod +x ./node_modules/.bin/cypress
 
-      - name: Debug environment
-        run: env
-
       - name: Run Cypress tests
-        run: ./node_modules/.bin/cypress run
+        run: npx cypress run
