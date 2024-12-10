@@ -26,10 +26,11 @@ jobs:
           node-version: '16'
 
       - name: Cache Cypress binary
-        if: matrix.os == 'windows-latest'
         uses: actions/cache@v3
         with:
-          path: C:\Users\runneradmin\AppData\Local\Cypress\Cache
+          path: |
+            ~/.cache/Cypress
+            C:/Users/runneradmin/AppData/Local/Cypress/Cache
           key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-cypress-
