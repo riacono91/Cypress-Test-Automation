@@ -20,8 +20,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Clean and install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+
+      - name: Ensure Cypress executable permissions
+        run: chmod +x ./node_modules/.bin/cypress
+
+      - name: Debug environment
+        run: env
 
       - name: Run Cypress tests
-        run: npx cypress run
+        run: ./node_modules/.bin/cypress run
