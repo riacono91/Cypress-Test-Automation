@@ -13,13 +13,13 @@ npm --version
 echo "Installing dependencies..."
 npm install
 
+# Ensure Cypress binary is executable
+echo "Ensuring Cypress binary permissions..."
+chmod +x ./node_modules/.bin/cypress
+
 # Install Cypress binary
 echo "Installing Cypress binary..."
 npx cypress install
-
-# Ensure Cypress binary is executable
-echo "Setting permissions for Cypress binary..."
-chmod +x ./node_modules/.bin/cypress
 
 # Done
 echo "Setup complete! You can now run Cypress with 'npx cypress run'."

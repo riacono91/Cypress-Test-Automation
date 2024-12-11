@@ -37,9 +37,7 @@ jobs:
 
       - name: Run setup script (Ubuntu)
         if: matrix.os == 'ubuntu-latest'
-        run: |
-          chmod +x ./setup.sh
-          ./setup.sh
+        run: bash setup.sh
             
       - name: Run setup script (Windows)
         if: matrix.os == 'windows-latest'
