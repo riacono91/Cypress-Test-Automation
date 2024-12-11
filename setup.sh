@@ -3,6 +3,12 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Log the environment
+echo "Node version:"
+node --version
+echo "NPM version:"
+npm --version
+
 # Install dependencies
 echo "Installing dependencies..."
 npm install

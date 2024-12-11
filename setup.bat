@@ -1,16 +1,20 @@
 @echo off
 REM Stop execution if any command fails
 setlocal enabledelayedexpansion
-IF %ERRORLEVEL% NEQ 0 EXIT /B %ERRORLEVEL%
+
+REM Log the environment
+echo Node version:
+node --version
+echo NPM version:
+npm --version
 
 REM Install dependencies
 echo Installing dependencies...
-npm install
+npm install || EXIT /B %ERRORLEVEL%
 
 REM Install Cypress binary
 echo Installing Cypress binary...
-npx cypress install
+npx cypress install || EXIT /B %ERRORLEVEL%
 
 REM Done!
 echo Setup complete! You can now run Cypress with 'npx cypress run'.
-pause
