@@ -54,12 +54,15 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           echo "Checking for Cypress binary in Windows..."
-          if exist "C:\Users\runneradmin\AppData\Local\Cypress\Cache" (
-            echo Cypress binary found.
-          ) else (
-            echo Cypress binary not found! Exiting...
-            exit 1
-          )
+          powershell -Command "
+            if (Test-Path 'C:\Users\runneradmin\AppData\Local\Cypress\Cache') {
+              Write-Output 'Cypress binary found.'
+            } else {
+              Write-Error 'Cypress binary not found! Exiting...'
+              exit 1
+            }
+          "
+        shell: pwsh
             
       - name: Run Cypress tests
         run: npx cypress run
