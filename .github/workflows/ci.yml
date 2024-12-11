@@ -46,5 +46,9 @@ jobs:
         run: |
           cmd /c setup.bat
 
+      - name: Verify Cypress binary exists
+        run: |
+          if [[ ${{ matrix.os }} == 'windows-latest' ]]; then dir "C:/Users/runneradmin/AppData/Local/Cypress/Cache"; else ls ~/.cache/Cypress; fi
+
       - name: Run Cypress tests
         run: npx cypress run

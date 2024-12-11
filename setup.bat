@@ -16,5 +16,13 @@ REM Install Cypress binary
 echo Installing Cypress binary...
 npx cypress install || EXIT /B %ERRORLEVEL%
 
-REM Done!
+REM Verify Cypress binary exists
+if exist "%LOCALAPPDATA%\Cypress\Cache" (
+    echo Cypress binary found.
+) else (
+    echo Cypress binary missing! Exiting.
+    EXIT /B 1
+)
+
+REM Done
 echo Setup complete! You can now run Cypress with 'npx cypress run'.
