@@ -5,12 +5,6 @@ setlocal enabledelayedexpansion
 REM Avoid any interactive prompts
 SET CI=true
 
-REM Install Node.js 18 using nvm
-CALL nvm install 18
-
-REM Use Node.js 18
-CALL nvm use 18
-
 REM Log the environment
 echo Node version:
 CALL node --version || EXIT /B %ERRORLEVEL%
