@@ -43,6 +43,8 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           cmd /c setup.bat
+        shell: cmd
+
 
       - name: Verify Cypress binary existence (Ubuntu)
         if: matrix.os == 'ubuntu-latest'

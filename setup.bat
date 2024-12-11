@@ -7,28 +7,35 @@ SET CI=true
 
 REM Log the environment
 echo Node version:
-node --version || EXIT /B %ERRORLEVEL%
+CALL node --version || EXIT /B %ERRORLEVEL%
 echo NPM version:
-npm --version || EXIT /B %ERRORLEVEL%
+CALL npm --version || EXIT /B %ERRORLEVEL%
+
 
 REM Install dependencies
 echo Installing dependencies...
-npm install || REM EXIT /B %ERRORLEVEL%
-echo "npm install exit code: %ERRORLEVEL%"
+CALL npm install
+echo npm install completed with exit code %ERRORLEVEL%
+if %ERRORLEVEL% neq 0 (
+    echo npm install failed, exiting.
+    EXIT /B %ERRORLEVEL%
+)
 
 REM Install Cypress binary
 echo Installing Cypress binary...
-npx cypress install || REM EXIT /B %ERRORLEVEL%
-echo "npx cypress install exit code: %ERRORLEVEL%"
-
-dir "%LOCALAPPDATA%\Cypress\Cache"
+CALL npx cypress install
+echo npx cypress install completed with exit code %ERRORLEVEL%
+if %ERRORLEVEL% neq 0 (
+    echo Cypress install failed, exiting.
+    EXIT /B %ERRORLEVEL%
+)
 
 REM Ensure Cypress binary exists
 if exist "%LOCALAPPDATA%\Cypress\Cache" (
     echo Cypress binary found.
 ) else (
     echo Cypress binary missing! Exiting.
-    REM EXIT /B 1
+    EXIT /B 1
 )
 
 REM Done
