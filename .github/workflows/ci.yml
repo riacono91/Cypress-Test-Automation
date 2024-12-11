@@ -55,7 +55,7 @@ jobs:
         run: |
           echo "Checking for Cypress binary in Windows..."
           powershell -Command "
-            if (Test-Path 'C:\Users\runneradmin\AppData\Local\Cypress\Cache') {
+            if (Test-Path 'C:\Users\iacon\AppData\Local\Cypress\Cache') {
               Write-Output 'Cypress binary found.'
             } else {
               Write-Error 'Cypress binary not found! Exiting...'
