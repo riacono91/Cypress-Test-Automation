@@ -30,6 +30,16 @@ if %ERRORLEVEL% neq 0 (
     EXIT /B %ERRORLEVEL%
 )
 
+REM Check Cypress cache path
+echo Checking Cypress cache folder...
+
+REM Cypress default cache path is typically located here on Windows
+set CYPRESS_CACHE_FOLDER=%LOCALAPPDATA%\Cypress\Cache
+
+REM Print the path of the Cypress cache
+echo Cypress cache folder is: %CYPRESS_CACHE_FOLDER%
+
+
 REM Ensure Cypress binary exists
 if exist "%LOCALAPPDATA%\Cypress\Cache" (
     echo Cypress binary found.
