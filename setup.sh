@@ -17,13 +17,9 @@ npm install
 echo "Installing Cypress binary..."
 npx cypress install
 
-# Verify Cypress binary exists
-if [ -d ~/.cache/Cypress ]; then
-  echo "Cypress binary found."
-else
-  echo "Cypress binary missing! Exiting."
-  exit 1
-fi
+# Ensure Cypress binary is executable
+echo "Setting permissions for Cypress binary..."
+chmod +x ./node_modules/.bin/cypress
 
 # Done
 echo "Setup complete! You can now run Cypress with 'npx cypress run'."

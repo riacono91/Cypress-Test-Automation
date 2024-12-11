@@ -40,7 +40,7 @@ jobs:
         run: |
           chmod +x ./setup.sh
           ./setup.sh
-
+            
       - name: Run setup script (Windows)
         if: matrix.os == 'windows-latest'
         run: |
