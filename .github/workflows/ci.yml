@@ -46,7 +46,17 @@ jobs:
 
       - name: Verify Cypress binary exists
         run: |
-          if [[ ${{ matrix.os }} == 'windows-latest' ]]; then dir "C:/Users/runneradmin/AppData/Local/Cypress/Cache"; else ls ~/.cache/Cypress; fi
+          if [[ ${{ matrix.os }} == 'windows-latest' ]]; then 
+            if exist "C:\Users\runneradmin\AppData\Local\Cypress\Cache" (
+              echo Cypress binary found.
+            ) else (
+              echo Cypress binary not found! Exiting...
+              exit 1
+            )
+          else 
+            ls ~/.cache/Cypress
+          fi
+        shell: cmd
 
       - name: Run Cypress tests
         run: npx cypress run
