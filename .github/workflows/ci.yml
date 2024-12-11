@@ -24,21 +24,9 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '18'
 
-      # Install nvm (Node Version Manager) for Windows
-      - name: Install nvm for windows
-        if: matrix.os == 'windows-latest'  
-        shell: powershell
-        run: |
-          Invoke-WebRequest -Uri https://github.com/coreybutler/nvm-windows/releases/download/1.1.12/nvm-setup.zip -OutFile nvm-setup.zip
-          Expand-Archive nvm-setup.zip -DestinationPath C:\nvm
-          setx NVM_HOME C:\nvm
-          setx NVM_SYMLINK C:\Program Files\nodejs
-          $env:NVM_HOME="C:\nvm"
-          $env:NVM_SYMLINK="C:\Program Files\nodejs"
-          C:\nvm\nvm.exe install 18
-          C:\nvm\nvm.exe use 18
+      
           
       - name: Cache Cypress binary
         uses: actions/cache@v3
