@@ -55,14 +55,25 @@ jobs:
         run: |
           echo "Checking for Cypress binary in Windows..."
           powershell -Command "
+            # Check if the folder exists
             if (Test-Path 'C:\Users\iacon\AppData\Local\Cypress\Cache') {
-              Write-Output 'Cypress binary found.'
+              Write-Output 'Cypress Cache folder found.'
+              # List the contents of the directory for debugging
+              Get-ChildItem 'C:\Users\iacon\AppData\Local\Cypress\Cache'
+              # Check if Cypress binary exists in the folder
+              if (Test-Path 'C:\Users\iacon\AppData\Local\Cypress\Cache\13.16.1\Cypress\Cypress.exe') {
+                Write-Output 'Cypress binary found.'
+              } else {
+                Write-Error 'Cypress binary not found in cache! Exiting...'
+                exit 1
+              }
             } else {
-              Write-Error 'Cypress binary not found! Exiting...'
+              Write-Error 'Cypress Cache folder not found! Exiting...'
               exit 1
             }
           "
         shell: pwsh
+        
             
       - name: Run Cypress tests
         run: npx cypress run
