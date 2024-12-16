@@ -2,6 +2,8 @@
 
 An example Cypress test automation project for showcasing end-to-end testing. This project tests a demo application and includes scripts to simplify the setup process for any user.
 
+Additionally, this repository includes a GitHub Actions workflow (`ci.yml`) that runs tests automatically on Windows and Ubuntu environments every time a pull request is made.
+
 ---
 
 ## **Table of Contents**
@@ -10,11 +12,11 @@ An example Cypress test automation project for showcasing end-to-end testing. Th
 2. [Setup Options](#setup-options)
     - [Unix/Linux/Mac Users](#unixlinuxmac-users)
     - [Windows Users](#windows-users)
-    - [Node.js Users](#nodejs-users)
 3. [Run Tests](#run-tests)
-4. [Project Structure](#project-structure)
-5. [Example Test](#example-test)
-6. [Contact](#contact)
+4. [Continuous Integration](#continuous-integration)
+5. [Project Structure](#project-structure)
+6. [Example Test](#example-test)
+7. [Contact](#contact)
 
 ---
 
@@ -22,7 +24,7 @@ An example Cypress test automation project for showcasing end-to-end testing. Th
 
 Before starting, make sure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (version 16 or above)
+- [Node.js](https://nodejs.org/) (version 16)
 - [npm](https://www.npmjs.com/) (comes with Node.js)
 - [Git](https://git-scm.com/)
 
@@ -42,12 +44,6 @@ Run the `setup.sh` script:
 Run the `setup.bat` file:
 ```bash
 setup.bat
-```
-
-### **Node.js Users**
-If you prefer a Node.js script, run:
-```bash
-node setup.js
 ```
 
 ### **NPM Command**
@@ -76,6 +72,22 @@ npx cypress run
 
 ---
 
+## **Continuous Integration**
+
+This repository includes a GitHub Actions workflow to automate the testing process:
+
+- The `ci.yml` file is located in the `.github/workflows/` directory.
+- The workflow is triggered automatically every time a pull request is made.
+- The tests run in both **Windows** and **Ubuntu** environments to ensure cross-platform compatibility.
+
+### Workflow Highlights:
+1. **Install Dependencies:** Installs Node.js and project dependencies.
+2. **Run Tests:** Executes the Cypress tests in headless mode on both operating systems.
+
+You can find the results of each test run in the **Actions** tab of the repository on GitHub.
+
+---
+
 ## **Project Structure**
 
 ```plaintext
@@ -84,6 +96,8 @@ Cypress-Test-Automation/
 │   ├── e2e/                 # End-to-end test specifications
 │   ├── fixtures/            # Test data
 │   ├── support/             # Custom commands and configurations
+├── .github/workflows/       # GitHub Actions workflows
+│   └── ci.yml               # Workflow configuration for CI
 ├── .gitignore               # Files and folders to ignore in version control
 ├── cypress.config.js        # Cypress configuration file
 ├── package.json             # NPM configuration and dependencies
@@ -97,17 +111,13 @@ Cypress-Test-Automation/
 
 ## **Example Test**
 
-Here’s a sample test included in the project:
+The project includes a demo based on the file **QA Automation Test Cypress - Homework**, which outlines the following objectives:
 
-```javascript
-describe('Example Test', () => {
-  it('Visits the Cypress example page and verifies navigation', () => {
-    cy.visit('https://example.cypress.io');
-    cy.contains('type').click();
-    cy.url().should('include', '/commands/actions');
-  });
-});
-```
+1. Create a **test plan** to define the scope and scenarios to be tested.
+2. Develop **test scripts** using Cypress to validate the specified requirements.
+3. Execute the tests and generate **test reports** to document the outcomes.
+
+This setup showcases how to efficiently plan, automate, and report on end-to-end testing for a demo application.
 
 ---
 
