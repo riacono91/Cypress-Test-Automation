@@ -2,7 +2,7 @@
 
 An example Cypress test automation project for showcasing end-to-end testing. This project tests a demo application and includes scripts to simplify the setup process for any user.
 
-Additionally, this repository includes a GitHub Actions workflow (`ci.yml`) that runs tests automatically on Windows and Ubuntu environments every time a pull request is made.
+Additionally, this repository includes a GitHub Actions workflow (`ci.yml`) that runs tests automatically on Windows and Ubuntu environments every time a pull request is made. The project also demonstrates the use of **Gherkin syntax** for Behavior-Driven Development (BDD) in both the test plan and some test scripts.
 
 ---
 
@@ -15,8 +15,9 @@ Additionally, this repository includes a GitHub Actions workflow (`ci.yml`) that
 3. [Run Tests](#run-tests)
 4. [Continuous Integration](#continuous-integration)
 5. [Project Structure](#project-structure)
-6. [Example Test](#example-test)
-7. [Contact](#contact)
+6. [Test Plan and Gherkin Integration](#test-plan-and-gherkin-integration)
+7. [Example Test](#example-test)
+8. [Contact](#contact)
 
 ---
 
@@ -94,6 +95,8 @@ You can find the results of each test run in the **Actions** tab of the reposito
 Cypress-Test-Automation/
 ├── cypress/                 # Cypress test files and configurations
 │   ├── e2e/                 # End-to-end test specifications
+│   │   ├── feature-based/   # Tests written with Gherkin syntax
+│   │   └── direct/          # Tests written directly in Cypress
 │   ├── fixtures/            # Test data
 │   ├── support/             # Custom commands and configurations
 ├── .github/workflows/       # GitHub Actions workflows
@@ -105,7 +108,37 @@ Cypress-Test-Automation/
 ├── setup.sh                 # Setup script for Unix/Linux/Mac
 ├── setup.bat                # Setup script for Windows
 ├── setup.js                 # Setup script using Node.js
+├── test-plan.md             # Test plan written in Gherkin syntax
 ```
+
+---
+
+## **Test Plan and Gherkin Integration**
+
+This project emphasizes **Behavior-Driven Development (BDD)** by incorporating Gherkin syntax in both the **test plan** and some of the **Cypress test scripts**.
+
+### **Test Plan**
+The `test-plan.md` file outlines the scope and scenarios to be tested using Gherkin's Given-When-Then syntax. This format ensures that test cases are:
+
+- Easily understandable by both technical and non-technical stakeholders.
+- Clearly aligned with the application's requirements.
+
+### **Gherkin in Test Scripts**
+Some test scripts in the `cypress/e2e/feature-based/` folder leverage Gherkin syntax with the help of the **cypress-cucumber-preprocessor** library. This demonstrates:
+
+- **Readable and maintainable tests:** The Gherkin approach allows for modular step definitions.
+- **Real-world usage of BDD tools:** Useful in collaborative environments where multiple roles (e.g., QA, developers, product owners) need to work together.
+
+For example, a login test might look like this in Gherkin:
+```gherkin
+Scenario: Successful login with valid credentials
+  Given the user is on the login page at https://example.com/login
+  When the user enters valid email and password
+  And clicks the "Login" button
+  Then the user should be redirected to the dashboard
+```
+
+Corresponding step definitions in Cypress automate these steps to validate the application behavior.
 
 ---
 
@@ -116,8 +149,7 @@ The project includes a demo based on the file **QA Automation Test Cypress - Hom
 1. Create a **test plan** to define the scope and scenarios to be tested.
 2. Develop **test scripts** using Cypress to validate the specified requirements.
 3. Execute the tests and generate **test reports** to document the outcomes.
-
-This setup showcases how to efficiently plan, automate, and report on end-to-end testing for a demo application.
+4. Demonstrate the use of **both Gherkin and direct Cypress scripts** to showcase versatility.
 
 ---
 
@@ -132,3 +164,4 @@ Feel free to reach out for questions, suggestions, or contributions:
 
 ### **Contributions**
 Contributions, issues, and feature requests are welcome! Please open a pull request or an issue to contribute.
+
