@@ -27,7 +27,7 @@ This test plan will cover the following key features:
 ### 1. Login
 
 #### Scenario: Successful login with valid credentials
-Given the user is on the login page at `https://ecommerce-site.com/login`
+Given the user is on the login page at `https://ecommerce-site.com/login` -> https://secure1.inmotionhosting.com/index/login
 When the user enters valid email and password
 And clicks the "Login" button
 Then the user should be redirected to the dashboard or "Home" page.
