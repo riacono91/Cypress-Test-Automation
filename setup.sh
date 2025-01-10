@@ -12,7 +12,7 @@ npm --version
 # Install dependencies
 echo "Installing dependencies..."
 npm install
-npm install --save-dev @bahmutov/cypress-esbuild-preprocessor @badeball/cypress-cucumber-preprocessor
+# npm install --save-dev @bahmutov/cypress-esbuild-preprocessor @badeball/cypress-cucumber-preprocessor
 
 
 # Ensure Cypress binary is executable

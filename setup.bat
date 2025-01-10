@@ -20,7 +20,7 @@ if %ERRORLEVEL% neq 0 (
     echo npm install failed, exiting.
     EXIT /B %ERRORLEVEL%
 )
-CALL npm install --save-dev @bahmutov/cypress-esbuild-preprocessor @badeball/cypress-cucumber-preprocessor
+REM CALL npm install --save-dev @bahmutov/cypress-esbuild-preprocessor @badeball/cypress-cucumber-preprocessor
 
 
 REM Install Cypress binary
