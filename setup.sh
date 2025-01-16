@@ -10,8 +10,8 @@ echo "NPM version:"
 npm --version
 
 # Install dependencies
-echo "Installing dependencies..."
-npm install
+#echo "Installing dependencies..."
+#npm install
 # npm install --save-dev @bahmutov/cypress-esbuild-preprocessor @badeball/cypress-cucumber-preprocessor
 
 

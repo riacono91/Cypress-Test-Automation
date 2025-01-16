@@ -12,14 +12,14 @@ echo NPM version:
 CALL npm --version || EXIT /B %ERRORLEVEL%
 
 
-REM Install dependencies
-echo Installing dependencies...
-CALL npm install
-echo npm install completed with exit code %ERRORLEVEL%
-if %ERRORLEVEL% neq 0 (
-    echo npm install failed, exiting.
-    EXIT /B %ERRORLEVEL%
-)
+REM Install dependencies -----commented
+REM echo Installing dependencies...
+REM CALL npm install
+REM echo npm install completed with exit code %ERRORLEVEL%
+REM if %ERRORLEVEL% neq 0 (
+REM     echo npm install failed, exiting.
+REM     EXIT /B %ERRORLEVEL%
+REM )
 REM CALL npm install --save-dev @bahmutov/cypress-esbuild-preprocessor @badeball/cypress-cucumber-preprocessor
 
 
@@ -43,12 +43,12 @@ echo Cypress cache folder is: %CYPRESS_CACHE_FOLDER%
 
 
 REM Ensure Cypress binary exists
-if exist "%LOCALAPPDATA%\Cypress\Cache" (
-    echo Cypress binary found.
-) else (
-    echo Cypress binary missing! Exiting.
-    EXIT /B 1
-)
+REM if exist "%LOCALAPPDATA%\Cypress\Cache" (
+REM     echo Cypress binary found.
+REM ) else (
+REM     echo Cypress binary missing! Exiting.
+REM     EXIT /B 1
+REM )
 
 REM Done
 echo Setup complete! You can now run Cypress with 'npx cypress run'.

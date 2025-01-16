@@ -55,6 +55,15 @@ jobs:
         run: |
           echo "Checking for Cypress binary in Ubuntu..."
           ls ~/.cache/Cypress || exit 1             
+      
+      - name: Clear Cypress cache
+        run: npx cypress cache clear
+
+      - name: Print Cypress configuration
+        run: npx cypress open
+
+      - name: Run Cypress tests in headless mode
+        run: npx cypress run --headless
 
       - name: Run Cypress tests
         run: npx cypress run
