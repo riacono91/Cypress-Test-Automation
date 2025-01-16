@@ -57,10 +57,7 @@ jobs:
           ls ~/.cache/Cypress || exit 1             
 
       - name: Print Cypress configuration
-        run: npx cypress open
+        run: npx cypress info
 
       - name: Run Cypress tests in headless mode
         run: npx cypress run --headless
-
-      - name: Run Cypress tests
-        run: npx cypress run
