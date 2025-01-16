@@ -1,22 +1,30 @@
 {
     "compilerOptions": {
-        "target": "es2019",            // Versione ECMAScript target
-        "module": "commonjs",          // Usa CommonJS come sistema di moduli
-        "strict": true,                // Abilita tutte le opzioni di TypeScript per una maggiore sicurezza
-        "esModuleInterop": true,       // Supporto per importazioni da moduli CommonJS
-        "resolveJsonModule": true,     // Permette di importare file JSON
-        "baseUrl": ".",                // Base URL per i percorsi relativi
-        "paths": {
-        "@/*": ["src/*"]             // Alias opzionale per percorsi più puliti
-        },
-        "types": ["cypress", "node"]   // Tipi aggiuntivi necessari (Cypress e Node.js)
+      "target": "es2020",               // Versione ECMAScript target aggiornata
+      "module": "commonjs",             // Usa CommonJS come sistema di moduli
+      "strict": true,                   // Abilita tutte le opzioni di TypeScript per una maggiore sicurezza
+      "esModuleInterop": true,          // Supporto per importazioni da moduli CommonJS
+      "resolveJsonModule": true,        // Permette di importare file JSON
+      "skipLibCheck": true,             // Salta il controllo delle librerie per evitare errori con dipendenze di terze parti
+      "baseUrl": ".",                   // Base URL per i percorsi relativi
+      "paths": {
+        "@/*": ["src/*"],               // Alias opzionale per percorsi più puliti
+        "*": ["node_modules/*"]         // Percorso di fallback per i moduli
+      },
+      "types": [
+        "cypress",                      // Tipi di Cypress
+        "node",                         // Tipi di Node.js
+        "@cucumber/cucumber"            // Tipi per Cucumber
+      ]
     },
     "include": [
-        "cypress/**/*.ts",             // Include tutti i file TypeScript in Cypress
-        "cypress/**/*.js",             // Include anche i file JavaScript
-        "cypress/**/*.feature"         // Include i file .feature (se usi Cucumber)
+      "cypress/**/*.js",                // Include anche i file JavaScript
+      "cypress/**/*.feature",           // Include i file .feature (per Cucumber)
+      "node_modules/@badeball/cypress-cucumber-preprocessor/**/*.ts" // Include tipi per il preprocessor
     ],
     "exclude": [
-        "node_modules"                 // Esclude la directory `node_modules`
+        "node_modules/**/*.test.ts",  // Escludi solo i file di test all'interno di node_modules, ad esempio
+        "node_modules/**/*.spec.ts"
     ]
-}
+  }
+  
