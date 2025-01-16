@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es2019",            // Versione ECMAScript target
+        "module": "commonjs",          // Usa CommonJS come sistema di moduli
+        "strict": true,                // Abilita tutte le opzioni di TypeScript per una maggiore sicurezza
+        "esModuleInterop": true,       // Supporto per importazioni da moduli CommonJS
+        "resolveJsonModule": true,     // Permette di importare file JSON
+        "baseUrl": ".",                // Base URL per i percorsi relativi
+        "paths": {
+        "@/*": ["src/*"]             // Alias opzionale per percorsi più puliti
+        },
+        "types": ["cypress", "node"]   // Tipi aggiuntivi necessari (Cypress e Node.js)
+    },
+    "include": [
+        "cypress/**/*.ts",             // Include tutti i file TypeScript in Cypress
+        "cypress/**/*.js",             // Include anche i file JavaScript
+        "cypress/**/*.feature"         // Include i file .feature (se usi Cucumber)
+    ],
+    "exclude": [
+        "node_modules"                 // Esclude la directory `node_modules`
+    ]
+}
