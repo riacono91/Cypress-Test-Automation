@@ -1,50 +1,55 @@
-# Test Plan: Validating Cypress.io Example Site
+# Test Plan - Gherkin Syntax
 
-## Objective
+## Feature: Bill Pay
 
-The objective of this test plan is to validate key features of the Cypress.io example site using Behavior-Driven Development (BDD) with Gherkin syntax. The focus is on demonstrating the ability to automate user interactions like form submissions, login flows, and button clicks.
+  #### Scenario: Submit Bill Payment with Valid Data
+    Given the user is logged in and on the "Bill Pay" page
+    When the user fills in the bill payment form with valid data
+    And submits the payment
+    Then the bill payment should be completed
+    And the confirmation message "Bill Payment Complete" should be visible
 
-## Scope
+## Feature: Login Flow
 
-This test plan covers the following key features:
+  #### Scenario: Login with Valid Credentials
+    Given the user is on the login page
+    When the user enters a valid username and password
+    And clicks the "Log In" button
+    Then the user should be redirected to the "Accounts Overview" page
+    And the page should contain "Accounts Overview"
 
-1. **Form Interaction**: Testing text input fields, dropdowns, and radio buttons.
-2. **Login Flow**: Verifying login behavior and handling alert messages.
-3. **UI Interaction**: Testing basic button clicks and page navigation.
+  #### Scenario: Login with Invalid Credentials
+    Given the user is on the login page
+    When the user enters an invalid username and password
+    And clicks the "Log In" button
+    Then an error message "An internal error has occurred and has been logged" should be displayed
 
-## Test Cases
+## Feature: Open New Account
 
-### 1. Form Interaction
+  #### Scenario: Open a New Savings Account
+    Given the user is logged in and on the "Open New Account" page
+    When the user selects "SAVINGS" as the account type
+    And selects an account to make the initial deposit from
+    And submits the form
+    Then a new savings account should be created
+    And the page should display the message "Account Opened!"
+    And the new account ID should be visible
 
-#### Scenario: Filling out form fields
-Given the user is on the "Actions" page  
-When the user types an email address into the email field  
-And the user selects an option from the dropdown  
-And the user clicks a radio button  
-Then the form fields should be correctly filled and reflect the appropriate values.
+## Feature: Transfer Funds
 
-### 2. Login Flow
+  #### Scenario: Transfer Funds Successfully
+    Given the user is logged in and on the "Transfer Funds" page
+    When the user enters a valid amount to transfer
+    And selects the source and destination accounts
+    And submits the transfer request
+    Then the confirmation message should display the transfer details:
+      | Transfer Amount | Source Account | Destination Account |
+      | $100.00         | 12345          | 67890               |
 
-#### Scenario: Invalid login attempt
-Given the user is on the "Actions" page  
-When the user clicks the login button with incorrect login credentials  
-Then an alert message should appear indicating that the login is invalid.
-
-### 3. UI Interaction
-
-#### Scenario: Navigating to another page after clicking a button
-Given the user is on the "Actions" page  
-When the user clicks the "type" button  
-Then the page should navigate to the "Actions" page showing the corresponding content.
-
-## Tools Used
-
-1. **Cypress**: For automating functional tests and verifying UI behavior.
-2. **Gherkin**: For defining test scenarios using Behavior-Driven Development (BDD) methodology.
-3. **Browser Developer Tools**: For verifying layout, styles, and responsiveness.
-
-## Success Criteria
-
-1. **Test Coverage**: All core UI interactions should be tested, including form inputs, buttons, and alerts.
-2. **Execution Time**: Tests should execute quickly without delays.
-3. **Accuracy**: Tests should pass consistently across multiple test runs.
+  #### Scenario: Transfer Funds with Missing Amount
+    Given the user is logged in and on the "Transfer Funds" page
+    When the user leaves the "Amount" field empty
+    And selects the source and destination accounts
+    And attempts to submit the form
+    Then an error message should be displayed indicating that the transfer failed
+    And the user should remain on the transfer page

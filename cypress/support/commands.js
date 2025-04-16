@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', () => {
+    cy.visit('https://parabank.parasoft.com/parabank/index.htm');
+    cy.get('input[name="username"]').type('john');
+    cy.get('input[name="password"]').type('demo');
+    cy.get('input[value="Log In"]').click();
+    cy.contains('Accounts Overview').should('be.visible');
+  });
+  

@@ -1,8 +1,10 @@
 # Cypress Test Automation Project
 
-This repository demonstrates an example Cypress test automation project for end-to-end testing. The tests are designed to validate a demo application and simplify the setup process for users. 
+This repository demonstrates an example Cypress test automation project for end-to-end testing of the website:  
+https://parabank.parasoft.com/parabank/index.htm
 
-The project integrates **Behavior-Driven Development (BDD)** with **Gherkin syntax** for test plan documentation and test script writing. Additionally, it includes a **GitHub Actions** workflow (`ci.yml`) to automatically run tests in Windows and Ubuntu environments each time a pull request is made.
+The project integrates **Behavior-Driven Development (BDD)** with **Gherkin syntax** for test plan documentation.  
+It also includes a **GitHub Actions** workflow (`ci.yml`) to automatically run tests on Windows and Ubuntu environments with every pull request.
 
 ## Table of Contents
 
@@ -13,142 +15,129 @@ The project integrates **Behavior-Driven Development (BDD)** with **Gherkin synt
 3. [Running Tests](#running-tests)
 4. [Continuous Integration](#continuous-integration)
 5. [Project Structure](#project-structure)
-6. [Test Plan and Gherkin Integration](#test-plan-and-gherkin-integration)
-7. [Example Test](#example-test)
+6. [Test Plan](#test-plan)
+7. [Example Test Scenarios](#example-test-scenarios)
 8. [Contact](#contact)
 
 ## Requirements
 
-Ensure you have the following installed:
+Make sure the following tools are installed:
 
-- [Node.js](https://nodejs.org/) (version 16)
+- [Node.js](https://nodejs.org/) (recommended version: 18.x or higher)
 - [npm](https://www.npmjs.com/) (comes with Node.js)
 - [Git](https://git-scm.com/)
 
 ## Setup
 
-You can set up this project using one of the following methods based on your operating system or preferences.
+You can set up this project using one of the following methods based on your operating system.
 
 ### Unix/Linux/Mac
 
-Run the setup script:
 ```bash
 ./setup.sh
 ```
 
 ### Windows
 
-Run the setup script:
 ```bash
 setup.bat
 ```
 
-### NPM Command
+### Alternative via npm
 
-Alternatively, you can use the `npm run setup` command available in the `package.json` file:
 ```bash
-npm run setup
+npm install
 ```
 
 ## Running Tests
 
-After completing the setup, you can run the tests with Cypress.
+Once setup is complete, you can run tests using Cypress.
 
 ### Open Cypress GUI
 
-To open the Cypress Test Runner:
 ```bash
 npx cypress open
 ```
 
-### Run Tests in Headless Mode
+### Headless Mode (CLI)
 
-To run tests in headless mode:
 ```bash
 npx cypress run
 ```
 
 ## Continuous Integration
 
-This repository includes a GitHub Actions workflow to automate the testing process:
+GitHub Actions workflow is located in:
 
-- The workflow file is located in `.github/workflows/ci.yml`.
-- The workflow is triggered automatically with each pull request.
-- Tests are executed on both **Windows** and **Ubuntu** to ensure cross-platform compatibility.
+```
+.github/workflows/ci.yml
+```
 
-### Workflow Highlights:
-1. **Install Dependencies:** Installs Node.js and project dependencies.
-2. **Run Tests:** Executes Cypress tests in headless mode on both operating systems.
+It triggers on each pull request and:
 
-You can view the results of each test run in the **Actions** tab of the repository on GitHub.
+- Installs Node.js and dependencies
+- Runs Cypress tests in headless mode
+- Executes tests on both Windows and Ubuntu
+
+Check the Actions tab in GitHub to see test results.
 
 ## Project Structure
 
 ```plaintext
 Cypress-Test-Automation/
-├── cypress/                 # Cypress test files and configurations
-│   ├── e2e/                 # End-to-end test specifications
-│   │   ├── feature-based/   # Tests written with Gherkin syntax
-│   │   └── direct/          # Tests written directly in Cypress
-│   ├── fixtures/            # Test data
-│   ├── support/             # Custom commands and configurations
 ├── .github/workflows/       # GitHub Actions workflows
-│   └── ci.yml               # Workflow configuration for CI
-├── .gitignore               # Files and folders to ignore in version control
-├── cypress.config.js        # Cypress configuration file
-├── package.json             # NPM configuration and dependencies
-├── README.md                # Project documentation
-├── setup.sh                 # Setup script for Unix/Linux/Mac
-├── setup.bat                # Setup script for Windows
-├── setup.js                 # Setup script using Node.js
-├── test-plan.md             # Test plan written in Gherkin syntax
+│   └── ci.yml
+├── cypress/
+│   ├── downloads/           # Files downloaded during tests
+│   ├── e2e/
+│   │   └── direct/
+│   │       ├── billpay.cy.js
+│   │       ├── loginFlow.cy.js
+│   │       ├── openaccount.cy.js
+│   │       └── transfer.cy.js
+│   ├── support/
+│       ├── commands.js
+│       └── e2e.js
+├── cypress.config.js        # Cypress configuration
+├── package.json             # Project dependencies
+├── package-lock.json        # Dependency lock file
+├── setup.sh                 # Unix setup script
+├── setup.bat                # Windows setup script
+├── test-plan.md             # Gherkin-based test plan
+└── README.md                # This file
 ```
 
-## Test Plan and Gherkin Integration
+## Test Plan
 
-This project emphasizes **Behavior-Driven Development (BDD)** by incorporating Gherkin syntax in both the **test plan** and some **Cypress test scripts**.
+The `test-plan.md` file uses **Gherkin syntax** to outline BDD test scenarios using the `Given-When-Then` format. This ensures clarity and collaboration between technical and non-technical stakeholders.
 
-### Test Plan
-
-The `test-plan.md` file outlines the scope and scenarios to be tested using Gherkin's Given-When-Then syntax. This format ensures that test cases are:
-
-- Easily understandable by both technical and non-technical stakeholders.
-- Clearly aligned with the application's requirements.
-
-### Gherkin in Test Scripts
-
-Some test scripts in the `cypress/e2e/feature-based/` folder use Gherkin syntax, thanks to the **cypress-cucumber-preprocessor** library. This approach provides:
-
-- **Readable and maintainable tests:** Gherkin allows for modular step definitions.
-- **Real-world BDD usage:** Especially useful in collaborative environments with multiple roles (QA, developers, product owners).
-
-Example Gherkin scenario for a login test:
+Example:
 ```gherkin
-Scenario: Successful login with valid credentials
-  Given the user is on the login page at https://example.com/login
-  When the user enters valid email and password
-  And clicks the "Login" button
-  Then the user should be redirected to the dashboard
+Feature: Funds Transfer
+
+  Scenario: Successful transfer between accounts
+    Given the user is logged in
+    When they transfer $100 from Account A to Account B
+    Then the balance should update accordingly
 ```
 
-Corresponding step definitions in Cypress automate these steps and validate the application's behavior.
+## Example Test Scenarios
 
-## Example Test
+Located in `cypress/e2e/direct/`:
 
-This project includes a demo based on the "QA Automation Test Cypress - Homework" file, which covers the following objectives:
-
-1. Create a **test plan** to define the scope and scenarios to be tested.
-2. Develop **test scripts** using Cypress to validate the specified requirements.
-3. Execute the tests and generate **test reports** to document the outcomes.
-4. Demonstrate the use of **both Gherkin and direct Cypress scripts** to showcase versatility.
+- `loginFlow.cy.js` — Tests login functionality
+- `billpay.cy.js` — Tests bill payment process
+- `openaccount.cy.js` — Tests new account creation
+- `transfer.cy.js` — Tests fund transfer between accounts
 
 ## Contact
 
-Feel free to reach out for questions, suggestions, or contributions:
+For questions, feedback or contributions:
 
-- **LinkedIn:** [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
-- **GitHub:** [Your GitHub Profile](https://github.com/your-username)
+- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
+- GitHub: [Your GitHub Profile](https://github.com/your-username)
 
-### Contributions
+## Contributions
 
-Contributions, issues, and feature requests are welcome! Please open a pull request or an issue to contribute.
+Contributions, issues, and feature requests are welcome.  
+Feel free to open a pull request or an issue.
