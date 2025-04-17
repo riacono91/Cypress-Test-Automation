@@ -134,8 +134,8 @@ Located in `cypress/e2e/direct/`:
 
 For questions, feedback or contributions:
 
-- LinkedIn: [Your LinkedIn Profile](www.linkedin.com/in/rita-iacono)
-- GitHub: [Your GitHub Profile](https://github.com/riacono91)
+- LinkedIn: [My LinkedIn Profile](www.linkedin.com/in/rita-iacono)
+- GitHub: [My GitHub Profile](https://github.com/riacono91)
 
 ## Contributions
 
